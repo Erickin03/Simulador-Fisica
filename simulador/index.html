@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queda Livre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img class="img" src= "Img/zipzop.png"alt="">
+        <h1 class="titulo"> Whatsapp </h1>
+    </header>
+    <main>
+        <div class="parametro" >
+            
+            <form action="">
+                <p>Peso:</p> 
+                <input type="number" id = "peso" placeholder="Kg"><br>
+                <p>Força constante:</p>
+                <input type="number" id ="forca" placeholder="Força c"><br>
+    
+                <div class="but">
+                    <input type="submit" id="send" value="ENVIAR">  
+                </div> 
+            </form> 
+        </div>
+    </main>
+
+    <div class="c"></div>
+
+    <script>        
+        var FPS = 120;
+        var dt = 50; //ms
+        var Yoy = -15;
+        var Yo = 0 ; // velocidade inicial
+        var g = 10; // m/s^2
+        var t = 0;  //tempo
+        var pX = 900;
+        var pY = Yo;
+       
+        
+
+
+
+        var circulo = document.querySelector(".c");
+        circulo.style.left = pX + 'px';
+        circulo.style.top = pY + 'px';  
+        const btn = document.querySelector("#send");
+
+        btn.addEventListener("click", function (e){
+            e.preventDefault();
+            var peso = document.getElementById("peso");
+            var pv = peso.value;
+            var f = document.getElementById("forca");
+            var fv = f.value;
+
+            var a = g - (fv/pv);
+
+            console.log(a);
+             
+
+            var intervalo = setInterval(function(){
+            t = t + dt/1000;
+            pY = Yo - Yoy*t + g*t*t/2;
+            pY = pY + 10;
+            circulo.style.top = pY + 'px';
+
+            if(pY > 617) {
+                pY = Yo;
+                t = 0;
+                clearInterval(intervalo);
+            }
+
+        },
+        1*1000/FPS);
+        });
+
+        
+        
+    </script>    
+</body>
+</html>
